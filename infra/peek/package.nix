@@ -1,4 +1,4 @@
-{ lib, ocamlPackages, ... }:
+{ lib, ocamlPackages, withTools, ... }:
 
 ocamlPackages.buildDunePackage {
   pname = "peek";
@@ -12,4 +12,10 @@ ocamlPackages.buildDunePackage {
       ./test
     ];
   };
+
+  nativeBuildInputs = lib.optionals withTools [
+    ocamlPackages.ocamlformat
+    ocamlPackages.ocaml-lsp
+    ocamlPackages.merlin
+  ];
 }

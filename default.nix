@@ -1,6 +1,7 @@
 {
   localSystem ? builtins.currentSystem,
   crossSystem ? localSystem,
+  withTools ? false, # Enable dev tooling when buildilng derivation
   ...
 }:
 
@@ -22,7 +23,7 @@ let
     filesystem
     ;
 
-  callPackage = callPackageWith (pkgs // { inherit world; });
+  callPackage = callPackageWith (pkgs // { inherit world withTools; });
 
   sourceFiles = fs.difference ./. (
     fs.unions [
